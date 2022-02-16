@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   View,
   ScrollView,
+  Alert,
 } from 'react-native';
 import Task from './components/Task';
 
@@ -17,14 +18,13 @@ export default function App() {
   const [taskItems, setTaskItems] = useState([]);
 
   const handleAddTask = () => {
-    setTaskItems([...taskItems, task]);
-    setTask(null);
-  };
-
+    //(task==null)? null: setTaskItems([...taskItems, task]),setTask(null)
+    task!=null&&setTaskItems([...taskItems, task]),setTask(null)
+    
+  }
   const complateTask = (index) => {
     let itemsCopy = [...taskItems];
-    itemsCopy.splice(index, 1);
-    setTaskItems(itemsCopy);
+    (itemsCopy[index] == "Saygınlık")? Alert.alert("Saygınlık tamamlanamaz bir görevdir!"):itemsCopy.splice(index, 1),setTaskItems(itemsCopy)
   };
 
   return (
@@ -107,12 +107,14 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     alignItems: 'center',
     paddingHorizontal: 10,
+    marginBottom: 5
   },
   input: {
+    marginBottom: 5,
     padding: 15,
     paddingHorizontal: 15,
     backgroundColor: '#FFF',
-    borderRadius: 30,
+    borderRadius: 15,
     borderColor: '#C0C0C0',
     borderWidth: 1,
     width: '75%',
@@ -126,8 +128,9 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   addWrapper: {
-    width: 60,
-    height: 60,
+    marginBottom: 5,
+    width: 45,
+    height: 45,
     backgroundColor: '#fff',
     borderRadius: 30,
     justifyContent: 'center',
